@@ -1,0 +1,10 @@
+Array
+(
+    [playerName] => Mohammed Salah
+    [jerseyNumber] => 5
+    [position] => Defender
+    [nationality] => Kenyan
+    [dob] => 2000-02-15
+    [height] => 5'6
+    [weight] => 70
+)

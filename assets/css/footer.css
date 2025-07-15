@@ -1,0 +1,150 @@
+/* Footer */
+.footer {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 50px 0 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-logo img {
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.footer-links h3, .footer-sponsors h3, .footer-newsletter h3 {
+    font-size: 18px;
+    margin: 0 0 15px;
+    color: #e94560;
+}
+.footer-sponsors p{
+    font-size: 0.7rem;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #e94560;
+}
+
+.sponsor-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.sponsor-logos img {
+    height: 40px;
+    object-fit: contain;
+}
+
+.footer-newsletter input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+.footer-newsletter button {
+    width: 100%;
+    padding: 10px;
+    background: #e94560;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+}
+
+/* Footer Responsive Styles */
+/* ======================== */
+
+/* Tablet Breakpoint (768px and below) */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .footer-logo,
+    .footer-links,
+    .footer-sponsors,
+    .footer-newsletter {
+        text-align: center;
+    }
+    
+    .sponsor-logos {
+        justify-content: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+/* Mobile Breakpoint (480px and below) */
+@media (max-width: 480px) {
+    .footer {
+        padding: 30px 15px;
+    }
+    
+    .footer-newsletter form {
+        flex-direction: column;
+    }
+    
+    .footer-newsletter input,
+    .footer-newsletter button {
+        width: 100%;
+    }
+    
+    .social-share {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .tags {
+        justify-content: center;
+    }
+}
+
+/* Special Cases for Footer */
+@media (max-width: 768px) {
+    .footer-links {
+        margin-top: 20px;
+    }
+    
+    .footer-sponsors {
+        margin: 20px 0;
+    }
+    
+    .footer-newsletter {
+        margin-top: 20px;
+    }
+}

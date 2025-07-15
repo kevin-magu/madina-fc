@@ -1,0 +1,13 @@
+Array
+(
+    [playerPhoto] => Array
+        (
+            [name] => WhatsApp Image 2025-07-11 at 10.56.08 PM.jpeg
+            [full_path] => WhatsApp Image 2025-07-11 at 10.56.08 PM.jpeg
+            [type] => image/jpeg
+            [tmp_name] => /private/var/tmp/phpjfarum1agsafdFfInrs
+            [error] => 0
+            [size] => 849172
+        )
+
+)
