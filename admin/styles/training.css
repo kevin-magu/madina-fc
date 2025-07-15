@@ -1,0 +1,239 @@
+
+
+/* Attendance Controls */
+.attendance-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    background-color: var(--white);
+    padding: 1rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.date-filter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.date-filter .form-group {
+    margin-bottom: 0;
+}
+
+.bulk-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Search Box */
+.search-box {
+    position: relative;
+    margin-bottom: 1.5rem;
+    max-width: 400px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    transition: var(--transition);
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.1);
+}
+
+.search-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+}
+
+/* Attendance Grid */
+.attendance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.attendance-card {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+
+.attendance-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.player-info {
+    margin-bottom: 0.75rem;
+}
+
+.player-name {
+    font-weight: 500;
+    color: var(--primary);
+    font-size: 0.95rem;
+}
+
+.attendance-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.attendance-btn {
+    flex: 1;
+    padding: 0.5rem;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.attendance-btn i {
+    font-size: 0.9em;
+}
+
+.present-btn {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--accent);
+}
+
+.present-btn.active {
+    background-color: var(--accent);
+    color: var(--white);
+}
+
+.absent-btn {
+    background-color: rgba(233, 69, 96, 0.1);
+    color: var(--secondary);
+}
+
+.absent-btn.active {
+    background-color: var(--secondary);
+    color: var(--white);
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.btn.small-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+.primary-btn {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.primary-btn:hover {
+    background-color: #0f0f1f;
+}
+
+.success-btn {
+    background-color: var(--accent);
+    color: var(--white);
+}
+
+.success-btn:hover {
+    background-color: #3d8b40;
+}
+
+.danger-btn {
+    background-color: var(--secondary);
+    color: var(--white);
+}
+
+.danger-btn:hover {
+    background-color: #d13354;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+/* Responsive Styles */
+@media (min-width: 992px) {
+    .admin-container {
+        flex-direction: row;
+    }
+    
+    .content {
+        margin-left: var(--sidebar-width);
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .attendance-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .attendance-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .bulk-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .date-filter {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .attendance-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .attendance-actions {
+        flex-direction: column;
+    }
+    
+    .attendance-btn {
+        padding: 0.5rem;
+    }
+}

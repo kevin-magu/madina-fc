@@ -38,6 +38,12 @@
                             <span>Results</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="training.php">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Training</span>
+                        </a>
+                    </li>
                    
                     <li>
                         <a href="players.php">

@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/db_connect.php';
+require_once '../../includes/db_connect.php';
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
@@ -45,26 +45,26 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
-    $resultId = $conn->insert_id; // optional for linking later
+    $resultId = $conn->insert_id;
 } else {
     echo json_encode(["success" => false, "message" => "Failed to save result."]);
     exit;
 }
 
-// 2. Update player_stats for scorers
+// 2. Update player_stats for scorers (linked by result_id)
+$scorerGoals = [];
 foreach ($scorers as $scorer) {
-    $playerId = (int)$scorer['id'];
+    $id = (int)$scorer['id'];
+    if (!isset($scorerGoals[$id])) $scorerGoals[$id] = 0;
+    $scorerGoals[$id]++;
+}
 
-    // Count how many times this player appears = number of goals
-    $goalCount = array_reduce($scorers, function ($count, $item) use ($playerId) {
-        return $count + ($item['id'] == $playerId ? 1 : 0);
-    }, 0);
-
+foreach ($scorerGoals as $playerId => $goalCount) {
     if ($goalCount === 0) continue;
 
-    // Check if record exists
-    $check = $conn->prepare("SELECT id, goals FROM player_stats WHERE player_id = ?");
-    $check->bind_param("i", $playerId);
+    // Check if player has a stat for this result already
+    $check = $conn->prepare("SELECT id, goals FROM player_stats WHERE player_id = ? AND result_id = ?");
+    $check->bind_param("ii", $playerId, $resultId);
     $check->execute();
     $res = $check->get_result();
 
@@ -73,13 +73,13 @@ foreach ($scorers as $scorer) {
         $newGoals = $row['goals'] + $goalCount;
 
         // Update
-        $update = $conn->prepare("UPDATE player_stats SET goals = ? WHERE player_id = ?");
-        $update->bind_param("ii", $newGoals, $playerId);
+        $update = $conn->prepare("UPDATE player_stats SET goals = ? WHERE id = ?");
+        $update->bind_param("ii", $newGoals, $row['id']);
         $update->execute();
     } else {
-        // Insert
-        $insert = $conn->prepare("INSERT INTO player_stats (player_id, goals) VALUES (?, ?)");
-        $insert->bind_param("ii", $playerId, $goalCount);
+        // Insert new stat linked to this result
+        $insert = $conn->prepare("INSERT INTO player_stats (player_id, goals, result_id) VALUES (?, ?, ?)");
+        $insert->bind_param("iii", $playerId, $goalCount, $resultId);
         $insert->execute();
     }
 }
