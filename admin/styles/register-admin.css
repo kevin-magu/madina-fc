@@ -1,0 +1,218 @@
+/* Admin Registration Styles */
+/* ======================== */
+
+:root {
+    --primary: #1a1a2e;
+    --secondary: #e94560;
+    --accent: #4CAF50;
+    --text: #333333;
+    --text-light: #777777;
+    --bg-light: #f5f5f7;
+    --border: #e0e0e0;
+    --white: #ffffff;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --radius: 8px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Base Layout */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg-light);
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Registration Card */
+.registration-card {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.registration-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.registration-header h1 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.registration-header p {
+    color: var(--text-light);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Form Styles */
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group.full-width {
+    flex: 0 0 100%;
+}
+
+label {
+    font-weight: 500;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    transition: var(--transition);
+    background-color: var(--bg-light);
+    width: 100%;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--secondary);
+    background-color: var(--white);
+    box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.1);
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.submit-btn {
+    padding: 0.75rem 2rem;
+    background-color: var(--secondary);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+}
+
+.submit-btn:hover {
+    background-color: #d13354;
+    transform: translateY(-2px);
+}
+
+.login-link {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.login-link a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .registration-card {
+        padding: 1.5rem;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .registration-header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .registration-card {
+        padding: 1.25rem;
+    }
+    
+    .content {
+        padding: 15px;
+    }
+    
+    .registration-header h1 {
+        font-size: 1.3rem;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"] {
+        padding: 0.75rem 1rem 0.75rem 2.25rem;
+    }
+    
+    .input-icon {
+        left: 0.75rem;
+    }
+}

@@ -1,26 +1,28 @@
 <?php
 require_once '../includes/db_connect.php';
 
+// Get the date from GET or use today's date
 $currentDate = $_GET['date'] ?? date('Y-m-d');
 
-// Fetch all players
+// Fetch all players (initial load)
 $players = [];
-$playerQuery = "SELECT id, name FROM players ORDER BY name ASC";
-$playerResult = mysqli_query($conn, $playerQuery);
-while ($row = mysqli_fetch_assoc($playerResult)) {
+$stmt = $conn->prepare("SELECT id, name FROM players ORDER BY name ASC");
+$stmt->execute();
+$result = $stmt->get_result();
+
+while ($row = $result->fetch_assoc()) {
     $players[] = $row;
 }
 
-// Get list of present players for selected date
+// Get attendance for the selected date
 $presentPlayerIds = [];
-$checkQuery = "SELECT player_id FROM player_training WHERE training_date = ?";
-$stmt = $conn->prepare($checkQuery);
-$stmt->bind_param("s", $currentDate);
-$stmt->execute();
-$res = $stmt->get_result();
+$attStmt = $conn->prepare("SELECT player_id FROM player_training WHERE date = ?");
+$attStmt->bind_param("s", $currentDate);
+$attStmt->execute();
+$attResult = $attStmt->get_result();
 
-while ($row = $res->fetch_assoc()) {
-    $presentPlayerIds[] = (int) $row['player_id'];
+while ($row = $attResult->fetch_assoc()) {
+    $presentPlayerIds[] = (int)$row['player_id'];
 }
 ?>
 
@@ -47,15 +49,15 @@ while ($row = $res->fetch_assoc()) {
         </header>
 
         <div class="attendance-controls">
-            <form method="get" class="date-filter">
+            <div class="date-filter">
                 <div class="form-group">
                     <label for="attendanceDate">Date</label>
-                    <input type="date" id="attendanceDate" name="date" value="<?= htmlspecialchars($currentDate) ?>" required>
+                    <input type="date" id="attendanceDate" name="date" value="<?= htmlspecialchars($currentDate) ?>">
                 </div>
-                <button type="submit" class="btn small-btn">
-                    <i class="fas fa-calendar-alt"></i> Load
+                <button type="button" class="btn small-btn" id="loadDate">
+                    <i class="fas fa-calendar-alt"></i> Load Attendance
                 </button>
-            </form>
+            </div>
 
             <div class="bulk-actions">
                 <button id="markAllPresent" class="btn success-btn">
@@ -74,7 +76,7 @@ while ($row = $res->fetch_assoc()) {
 
         <div class="attendance-grid" id="attendanceContainer">
             <?php foreach ($players as $player): 
-                $playerId = $player['id'];
+                $playerId = (int)$player['id'];
                 $isPresent = in_array($playerId, $presentPlayerIds);
             ?>
             <div class="attendance-card" data-player-id="<?= $playerId ?>">
@@ -102,7 +104,7 @@ while ($row = $res->fetch_assoc()) {
 </div>
 
 <script>
-    const selectedDate = "<?= $currentDate ?>";
+    const currentDate = "<?= $currentDate ?>";
 </script>
 <script src="scripts/training.js"></script>
 </body>

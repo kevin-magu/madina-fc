@@ -52,7 +52,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#settings">
+                        <a href="settings.php">
                             <i class="fas fa-cog"></i>
                             <span>Settings</span>
                         </a>

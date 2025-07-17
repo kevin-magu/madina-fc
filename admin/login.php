@@ -1,76 +1,67 @@
 <?php
-session_start();
 require_once '../includes/db_connect.php';
+// require_once 'includes/functions.php';
 
-$error = '';
-
-// Check if the form was submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get and sanitize input
-    $inputPassword = trim($_POST['password'] ?? '');
-
-    // Hardcoded username (admin only)
-    $stmt = $pdo->prepare("SELECT * FROM admins WHERE username = 'admin'");
-    $stmt->execute();
-    $admin = $stmt->fetch();
-
-    // If admin record exists
-    if ($admin) {
-        $storedPassword = $admin['password']; // Plain-text password in DB
-
-        // Direct comparison (only works for plain-text passwords)
-        if ($inputPassword === $storedPassword) {
-            // Correct password, set session and redirect
-            $_SESSION['admin_logged_in'] = true;
-            $_SESSION['admin_username'] = $admin['username'];
-            header("Location: dashboard.php");
-            exit;
-        } else {
-            $error = 'Incorrect password.';
-        }
-    } else {
-        $error = 'Admin user not found.';
-    }
-}
-
-$pageTitle = "Admin Login";
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $pageTitle; ?></title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <title>Admin Login | Madina FC</title>
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="./styles/commonStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-form">
-            <h2>Madina FC Admin</h2>
-            
-            <?php if ($error): ?>
-                <div class="form-message error"><?php echo $error; ?></div>
-            <?php endif; ?>
-            
-            <form method="POST">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
+    <div class="admin-container">
+        <main class="content">
+            <div class="login-card">
+            <div class="login-header">
+                    <h1><i class="fas fa-sign-in-alt"></i> Admin Login</h1>
+                    <p>Access your administrator dashboard</p>
                 </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                
-                <button type="submit" class="btn">Login</button>
-            </form>
-        </div>
+
+                <form id="loginForm" class="login-form" method="POST">
+                    <div class="form-group">
+                        <label for="email">Admin Username</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-id-card input-icon"></i>
+                            <input type="number" id="username" name="username" placeholder="Enter your username" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="forgot-password.php" class="forgot-password">Forgot password?</a>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </div>
+
+                    <div class="register-link">
+                        Don't have an account? <a href="register-admin.php">Register</a>
+                    </div>
+                </form>
+            </div>
+        </main>
     </div>
+<script src="scripts/login.js"></script>
+
 </body>
 </html>

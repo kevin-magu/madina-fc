@@ -1,0 +1,161 @@
+/* System Settings Styles */
+/* ===================== */
+
+
+
+
+/* Header Styles */
+.content-header {
+    margin-bottom: 30px;
+}
+
+.content-header h1 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.content-header h1 i {
+    color: var(--secondary);
+}
+
+.breadcrumb {
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+.breadcrumb a {
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Settings Grid */
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.settings-card {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.settings-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: var(--border);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: var(--white);
+}
+
+.settings-card h3 {
+    margin: 0 0 0.5rem;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.settings-card p {
+    margin: 0;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+/* Card Color Variants */
+.account-card .card-icon {
+    background-color: #6c5ce7;
+    background-image: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+}
+
+.admin-card .card-icon {
+    background-color: #00b894;
+    background-image: linear-gradient(135deg, #00b894 0%, #55efc4 100%);
+}
+
+.team-card .card-icon {
+    background-color: #0984e3;
+    background-image: linear-gradient(135deg, #0984e3 0%, #74b9ff 100%);
+}
+
+.notification-card .card-icon {
+    background-color: #fdcb6e;
+    background-image: linear-gradient(135deg, #fdcb6e 0%, #ffeaa7 100%);
+}
+
+.system-card .card-icon {
+    background-color: #e17055;
+    background-image: linear-gradient(135deg, #e17055 0%, #fab1a0 100%);
+}
+
+.backup-card .card-icon {
+    background-color: #636e72;
+    background-image: linear-gradient(135deg, #636e72 0%, #b2bec3 100%);
+}
+
+/* Responsive Styles */
+@media (min-width: 992px) {
+    .admin-container {
+        flex-direction: row;
+    }
+    
+    .content {
+        margin-left: var(--sidebar-width);
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .settings-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+    
+    .settings-card {
+        padding: 1.25rem;
+    }
+    
+    .card-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .content-header h1 {
+        font-size: 1.3rem;
+    }
+}

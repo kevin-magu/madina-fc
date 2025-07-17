@@ -28,7 +28,7 @@
         <form class="search-form" onsubmit="return false;">
           <div class="search-box">
             <input type="text" id="newsSearchInput" name="search" placeholder="Search news..." />
-            <button type="button" id="newsSearchBtn"><i class="fas fa-search"></i></button>
+            <!-- <button type="button" id="newsSearchBtn"><i class="fas fa-search"></i></button> -->
           </div>
         </form>
         <a href="upload-news.php" class="add-new-btn">

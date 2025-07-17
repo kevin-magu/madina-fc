@@ -1,76 +1,86 @@
-// scripts/attendance.js
+// training.js
 
-document.addEventListener('DOMContentLoaded', () => {
-    const attendanceContainer = document.getElementById('attendanceContainer');
-    const attendanceDate = document.getElementById('attendanceDate').value;
+const attendanceContainer = document.getElementById('attendanceContainer');
+const markAllPresentBtn = document.getElementById('markAllPresent');
+const markAllAbsentBtn = document.getElementById('markAllAbsent');
+const saveAttendanceBtn = document.getElementById('saveAttendance');
+const attendanceDateInput = document.getElementById('attendanceDate');
+const playerSearchInput = document.getElementById('playerSearch');
 
-    // Mark all present
-    document.getElementById('markAllPresent').addEventListener('click', () => {
-        document.querySelectorAll('.attendance-card').forEach(card => {
-            markAttendance(card, 'present');
-        });
-    });
+const attendanceStatus = {};
 
-    // Mark all absent
-    document.getElementById('markAllAbsent').addEventListener('click', () => {
-        document.querySelectorAll('.attendance-card').forEach(card => {
-            markAttendance(card, 'absent');
-        });
-    });
-
-    // Search functionality
-    document.getElementById('playerSearch').addEventListener('input', function () {
-        const query = this.value.toLowerCase();
-        document.querySelectorAll('.attendance-card').forEach(card => {
-            const name = card.querySelector('.player-name').textContent.toLowerCase();
-            card.style.display = name.includes(query) ? '' : 'none';
-        });
-    });
-
-    // Individual click listeners
-    attendanceContainer.addEventListener('click', async (e) => {
-        if (e.target.closest('.attendance-btn')) {
-            const button = e.target.closest('.attendance-btn');
-            const status = button.dataset.status;
-            const card = button.closest('.attendance-card');
-
-            await markAttendance(card, status);
-        }
-    });
-
-    async function markAttendance(card, status) {
+attendanceContainer.addEventListener('click', (e) => {
+    if (e.target.closest('.attendance-btn')) {
+        const btn = e.target.closest('.attendance-btn');
+        const card = btn.closest('.attendance-card');
         const playerId = card.dataset.playerId;
+        const status = btn.dataset.status;
 
-        // Highlight the selected button
-        const presentBtn = card.querySelector('.present-btn');
-        const absentBtn = card.querySelector('.absent-btn');
+        card.querySelectorAll('.attendance-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-        if (status === 'present') {
-            presentBtn.classList.add('active');
-            absentBtn.classList.remove('active');
-
-            await fetch('processing/training.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    player_id: playerId,
-                    status: 'present',
-                    date: attendanceDate
-                })
-            });
-        } else if (status === 'absent') {
-            absentBtn.classList.add('active');
-            presentBtn.classList.remove('active');
-
-            await fetch('processing/training.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    player_id: playerId,
-                    status: 'absent',
-                    date: attendanceDate
-                })
-            });
-        }
+        attendanceStatus[playerId] = status;
+        updateAttendance(playerId, status);
     }
+});
+
+markAllPresentBtn.addEventListener('click', () => {
+    document.querySelectorAll('.attendance-card').forEach(card => {
+        const playerId = card.dataset.playerId;
+        attendanceStatus[playerId] = 'present';
+        updateAttendance(playerId, 'present');
+        card.querySelectorAll('.attendance-btn').forEach(b => b.classList.remove('active'));
+        card.querySelector(".present-btn").classList.add('active');
+    });
+});
+
+markAllAbsentBtn.addEventListener('click', () => {
+    document.querySelectorAll('.attendance-card').forEach(card => {
+        const playerId = card.dataset.playerId;
+        attendanceStatus[playerId] = 'absent';
+        updateAttendance(playerId, 'absent');
+        card.querySelectorAll('.attendance-btn').forEach(b => b.classList.remove('active'));
+        card.querySelector(".absent-btn").classList.add('active');
+    });
+});
+
+function updateAttendance(playerId, status) {
+    const date = attendanceDateInput.value;
+    fetch('processing/training.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ playerId, status, date })
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+}
+
+document.getElementById('loadDate').addEventListener('click', () => {
+    const date = attendanceDateInput.value;
+    const searchTerm = playerSearchInput.value;
+    
+    fetch('processing/search-player2.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `query=${encodeURIComponent(searchTerm)}&date=${encodeURIComponent(date)}`
+    })
+    .then(res => res.text())
+    .then(html => {
+        attendanceContainer.innerHTML = html;
+    });
+});
+
+playerSearchInput.addEventListener('input', () => {
+    const searchTerm = playerSearchInput.value.toLowerCase();
+    document.querySelectorAll('.attendance-card').forEach(card => {
+        const name = card.querySelector('.player-name').textContent.toLowerCase();
+        card.style.display = name.includes(searchTerm) ? '' : 'none';
+    });
+});
+
+saveAttendanceBtn.addEventListener('click', () => {
+    alert('Attendance has been saved and synced in real-time.');
 });
