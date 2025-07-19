@@ -26,7 +26,7 @@ require_once '../includes/db_connect.php';
                     <a href="index.php">Dashboard</a> / <span>Add Player</span>
                 </div>
             </header>
-
+            
             <div class="upload-card">
                 <form id="playerForm" class="news-form" action="process-add-player.php" method="POST" enctype="multipart/form-data">
                     <!-- Player Basic Info -->

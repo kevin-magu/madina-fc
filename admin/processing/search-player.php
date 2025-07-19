@@ -50,7 +50,7 @@ while ($row = $result->fetch_assoc()) {
             </a>
         <span class="action-btn delete-btn" title="Delete" data-id="' . $row['id'] . '">
             <i class="fas fa-trash-alt"></i>
-        </span>;
+        </span>
 
 
         </div>

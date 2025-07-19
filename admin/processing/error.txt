@@ -1,2 +1,6 @@
 [2025-07-13 14:10:37] Missing fields: playerPhoto
 [2025-07-13 16:29:56] Missing fields: playerPhoto
+[2025-07-19 12:21:56] Missing fields: playerPhoto
+[2025-07-19 12:24:03] Missing fields: playerName, jerseyNumber, dob, weight, playerPhoto
+[2025-07-19 12:57:49] Missing fields: dob, playerPhoto
+[2025-07-19 13:05:06] Missing fields: dob

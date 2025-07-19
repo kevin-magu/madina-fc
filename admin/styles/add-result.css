@@ -1,21 +1,4 @@
 /* Add Result Page Styles - Responsive Layout */
-/* ========================================= */
-
-:root {
-    --primary: #1a1a2e;
-    --secondary: #e94560;
-    --accent: #4CAF50;
-    --text: #333333;
-    --text-light: #777777;
-    --bg-light: #f5f5f7;
-    --border: #e0e0e0;
-    --white: #ffffff;
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    --radius: 12px;
-    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --sidebar-width: 280px;
-}
-
 /* Form Container */
 .upload-card {
     background-color: var(--white);
@@ -144,7 +127,7 @@ select {
 .score-section {
     background-color: var(--bg-light);
     border-radius: var(--radius);
-    padding: 1.5rem;
+    padding: 0.6rem;
     margin-bottom: 1.5rem;
 }
 
@@ -278,7 +261,7 @@ select {
 
 @media (max-width: 480px) {
     .upload-card {
-        padding: 1rem;
+        padding: 0.6rem;
     }
     
     .team-score {

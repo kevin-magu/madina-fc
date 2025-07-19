@@ -20,7 +20,7 @@
                 <div class="header-actions">
                     <div class="search-box">
                         <input type="text" placeholder="Search...">
-                        <button><i class="fas fa-search"></i></button>
+                       <!-- <button><i class="fas fa-search"></i></button> -->
                     </div>
                     <div class="notifications">
                         <i class="fas fa-bell"></i>

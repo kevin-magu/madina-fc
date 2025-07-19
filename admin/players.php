@@ -29,7 +29,7 @@ require_once '../includes/db_connect.php';
                 <form class="search-form" onsubmit="return false;">
                     <div class="search-box">
                         <input type="text" id="searchInput" name="search" placeholder="Search player...">
-                        <button type="button" id="searchBtn"><i class="fas fa-search"></i></button>
+                      <!--  <button type="button" id="searchBtn"><i class="fas fa-search"></i></button> -->
                     </div>
                 </form>
                 <a href="add-player.php" class="add-new-btn">

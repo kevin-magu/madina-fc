@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (photoInput.files.length > 0) {
             formData.append('playerPhoto', photoInput.files[0]);
         }
-
+        console.log('This is the player submission page')
         // Debugging
         const debugData = {};
         for (const [key, value] of formData.entries()) {
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (result) {
                 alert('Player added successfully.');
-                window.location.href = 'players.php';
+               // window.location.href = 'players.php';
             } else {
                 alert(result.message || 'Upload failed.');
             }

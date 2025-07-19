@@ -2,12 +2,12 @@ Array
 (
     [playerPhoto] => Array
         (
-            [name] => WhatsApp Image 2025-07-11 at 10.56.08 PM.jpeg
-            [full_path] => WhatsApp Image 2025-07-11 at 10.56.08 PM.jpeg
+            [name] => 1F6E170C-FC9F-4DAD-81B9-1119A8031592_1_102_o.jpeg
+            [full_path] => 1F6E170C-FC9F-4DAD-81B9-1119A8031592_1_102_o.jpeg
             [type] => image/jpeg
-            [tmp_name] => /private/var/tmp/phpjfarum1agsafdFfInrs
+            [tmp_name] => /private/var/tmp/phpvnrvuer8ff1b2vLCnMy
             [error] => 0
-            [size] => 849172
+            [size] => 57604
         )
 
 )

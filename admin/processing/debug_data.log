@@ -1,10 +1,10 @@
 Array
 (
-    [playerName] => Mohammed Salah
-    [jerseyNumber] => 5
-    [position] => Defender
+    [playerName] => Hassan McAlister
+    [jerseyNumber] => 7
+    [position] => Forward
     [nationality] => Kenyan
-    [dob] => 2000-02-15
+    [dob] => 2000-01-26
     [height] => 5'6
     [weight] => 70
 )

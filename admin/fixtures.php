@@ -92,6 +92,10 @@ $conn->close();
                                 <a data-id="<?php echo $fixture['id']; ?>" class="action-btn delete-btn" title="Delete">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
+                                <span class="action-btn update-fixture-btn">
+                                  <i class="fas fa-check-circle"></i>
+                                  <p class='game-done-p' data-id="<?php echo $fixture['id']; ?>">Mark game as complete</p>
+                                </span>
                             </div>
                         </div>
                         <?php endforeach; ?>
@@ -102,5 +106,6 @@ $conn->close();
     </div>
 
     <script src='scripts/delete-fixture.js'></script>
+    <script src='scripts/update-fixture'></script>
 </body>
 </html>

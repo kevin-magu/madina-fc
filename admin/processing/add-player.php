@@ -132,7 +132,7 @@ $position = trim($data['position']);
 $jerseyNumber = trim($data['jerseyNumber'] ?? '');
 $nationality = trim($data['nationality'] ?? '');
 $dob = trim($data['dob'] ?? null);
-$height = trim($data['height'] ?? null);
+$height = $data['height'] ?? null;
 $weight = trim($data['weight'] ?? null);
 $joinedAt = date('Y-m-d');
 
@@ -171,8 +171,30 @@ if (!empty($files['playerPhoto']) && $files['playerPhoto']['error'] === UPLOAD_E
     $idPhotoPath = '/madina-fc/uploads/players/' . $newName;
 }
 
+function generateUniqueClubId($conn) {
+    do {
+        // Generate random 4-digit code
+        $code = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
+
+        // Prepare and execute query to check existence
+        $stmt = $conn->prepare("SELECT 1 FROM players WHERE club_id = ? LIMIT 1");
+        $stmt->bind_param("s", $code);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $exists = $result->num_rows > 0;
+
+
+    } while ($exists);
+
+    return $code;
+}
+
+// Usage
+$uniqueClubId = generateUniqueClubId($conn);
+
 // === Insert Player ===
-$stmt = $conn->prepare("INSERT INTO players (name, id_photo_path, position, jersey_number, nationality, date_of_birth, height, weight_kg, joined_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO players (club_id, name, id_photo_path, position, jersey_number, nationality, date_of_birth, height, weight_kg, joined_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 if (!$stmt) {
     log_error("DB prepare error: " . $conn->error);
@@ -180,19 +202,19 @@ if (!$stmt) {
     exit;
 }
 
-// Bind parameters
-$heightFloat = !empty($height) ? (float)$height : null;
+// Bind parameters 
 $weightFloat = !empty($weight) ? (float)$weight : null;
 
 $stmt->bind_param(
-    "ssssssdds",
+    "ssssssssds",
+    $uniqueClubId,
     $name,
     $idPhotoPath,
     $position,
     $jerseyNumber,
     $nationality,
     $dob,
-    $heightFloat,
+    $height,
     $weightFloat,
     $joinedAt
 );

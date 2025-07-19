@@ -29,7 +29,7 @@ require_once '../includes/db_connect.php';
 
             <div class="settings-grid">
                 <!-- Account Settings Card -->
-                <a href="account-settings.php" class="settings-card account-card">
+                <a href="#account-settings.php" class="settings-card account-card">
                     <div class="card-icon">
                         <i class="fas fa-user-cog"></i>
                     </div>
@@ -47,7 +47,7 @@ require_once '../includes/db_connect.php';
                 </a>
 
                 <!-- Team Settings Card -->
-                <a href="team-settings.php" class="settings-card team-card">
+                <a href="#team-settings.php" class="settings-card team-card">
                     <div class="card-icon">
                         <i class="fas fa-users"></i>
                     </div>
@@ -56,7 +56,7 @@ require_once '../includes/db_connect.php';
                 </a>
 
                 <!-- Notification Settings Card -->
-                <a href="notification-settings.php" class="settings-card notification-card">
+                <a href="#notification-settings.php" class="settings-card notification-card">
                     <div class="card-icon">
                         <i class="fas fa-bell"></i>
                     </div>
@@ -65,7 +65,7 @@ require_once '../includes/db_connect.php';
                 </a>
 
                 <!-- System Preferences Card -->
-                <a href="system-preferences.php" class="settings-card system-card">
+                <a href="#system-preferences.php" class="settings-card system-card">
                     <div class="card-icon">
                         <i class="fas fa-sliders-h"></i>
                     </div>
@@ -74,7 +74,7 @@ require_once '../includes/db_connect.php';
                 </a>
 
                 <!-- Backup & Restore Card -->
-                <a href="backup-restore.php" class="settings-card backup-card">
+                <a href="#backup-restore.php" class="settings-card backup-card">
                     <div class="card-icon">
                         <i class="fas fa-database"></i>
                     </div>

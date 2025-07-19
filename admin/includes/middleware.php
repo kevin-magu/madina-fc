@@ -28,7 +28,7 @@ if (!$token) {
         header('Content-Type: application/json');
         echo json_encode(['success' => false, 'message' => 'Authentication required']);
     } else {
-        header("Location: admin/login.php?redirect=" . urlencode($_SERVER['REQUEST_URI']));
+        header("Location: login.php?redirect=" . urlencode($_SERVER['REQUEST_URI']));
     }
     exit;
 }

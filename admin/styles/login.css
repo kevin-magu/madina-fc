@@ -71,24 +71,7 @@ label {
     font-size: 0.95rem;
 }
 
-input[type="number"],
-input[type="password"] {
-    padding: 0.75rem 1rem 0.75rem 2.5rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    font-size: 0.95rem;
-    transition: var(--transition);
-    background-color: var(--bg-light);
-    width: 100%;
-}
 
-input[type="email"]:focus,
-input[type="password"]:focus {
-    outline: none;
-    border-color: var(--secondary);
-    background-color: var(--white);
-    box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.1);
-}
 
 /* Form Options */
 .form-options {
