@@ -8,15 +8,23 @@ function log_error($msg) {
     error_log($entry, 3, $logFile);
 }
 
-// Only allow DELETE method
 if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     http_response_code(405);
     echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
     exit;
 }
 
-// Parse URL to get the fixture ID
-$fixtureId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+// Check if ID is from JSON body
+$raw = file_get_contents("php://input");
+$input = json_decode($raw, true);
+
+// Get ID either from JSON or URL
+$fixtureId = 0;
+if (isset($input['id'])) {
+    $fixtureId = intval($input['id']);
+} elseif (isset($_GET['id'])) {
+    $fixtureId = intval($_GET['id']);
+}
 
 if ($fixtureId <= 0) {
     log_error("Invalid fixture ID for deletion.");
@@ -24,7 +32,7 @@ if ($fixtureId <= 0) {
     exit;
 }
 
-// Perform deletion
+// Proceed with deletion
 $stmt = $conn->prepare("DELETE FROM fixtures WHERE id = ?");
 if (!$stmt) {
     log_error("Prepare failed: " . $conn->error);
@@ -33,7 +41,6 @@ if (!$stmt) {
 }
 
 $stmt->bind_param('i', $fixtureId);
-
 if ($stmt->execute()) {
     echo json_encode(['success' => true, 'message' => 'Fixture deleted successfully.']);
 } else {
@@ -43,3 +50,4 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
+

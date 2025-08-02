@@ -6,7 +6,7 @@ $q = $_GET['q'] ?? '';
 $q = '%' . $conn->real_escape_string($q) . '%';
 
 $sql = "
-    SELECT id, name, id_photo_path, position, jersey_number, nationality, date_of_birth, height, weight_kg
+    SELECT id, name, id_photo_path, position, jersey_number, nationality, date_of_birth, height, club_id,weight_kg
     FROM players
     WHERE name LIKE ? OR position LIKE ? OR nationality LIKE ?
     ORDER BY name ASC
@@ -26,6 +26,7 @@ if ($result->num_rows === 0) {
 while ($row = $result->fetch_assoc()) {
     $photoPath = $row['id_photo_path'] ?: 'assets/images/default.jpg';
     $age = $row['date_of_birth'] ? date_diff(date_create($row['date_of_birth']), date_create('today'))->y : 'N/A';
+    $clubId = $row['club_id'];
 
     echo '<div class="player-card">
         <div class="player-photo">
@@ -42,6 +43,7 @@ while ($row = $result->fetch_assoc()) {
                 <span><i class="fas fa-ruler-vertical"></i> ' . htmlspecialchars($row['height']) . 'cm</span>
                 <span><i class="fas fa-weight"></i> ' . htmlspecialchars($row['weight_kg']) . 'kg</span>
                 <span><i class="fas fa-birthday-cake"></i> ' . $age . '</span>
+                <span><i class="fas fa-id-badge"></i> ' . $clubId . '</span>
             </div>
         </div>
         <div class="player-actions">

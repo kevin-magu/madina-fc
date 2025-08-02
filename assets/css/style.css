@@ -39,7 +39,7 @@ body {
     background: linear-gradient(
         135deg, 
         rgba(26, 26, 46, 0.85) 0%, 
-        rgba(233, 69, 96, 0.4) 100%
+        rgba(33, 19, 21, 0.4) 100%
     );
     z-index: 1;
     mix-blend-mode: multiply;

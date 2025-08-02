@@ -92,10 +92,10 @@ $conn->close();
                                 <a data-id="<?php echo $fixture['id']; ?>" class="action-btn delete-btn" title="Delete">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
-                                <span class="action-btn update-fixture-btn">
+                                <a class="action-btn update-fixture-btn" href="update-fixture.php?id=<?php echo $fixture['id']; ?>">
                                   <i class="fas fa-check-circle"></i>
-                                  <p class='game-done-p' data-id="<?php echo $fixture['id']; ?>">Mark game as complete</p>
-                                </span>
+                                  <p class='game-done-p'>Mark game as complete</p>
+                                </a>
                             </div>
                         </div>
                         <?php endforeach; ?>
@@ -106,6 +106,22 @@ $conn->close();
     </div>
 
     <script src='scripts/delete-fixture.js'></script>
-    <script src='scripts/update-fixture'></script>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Listen for click events on all update fixture buttons
+  document.querySelectorAll('.update-fixture-btn').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent default navigation
+
+      const confirmDone = confirm("Are you sure the game is complete?");
+      if (confirmDone) {
+        // Redirect to the href if confirmed
+        window.location.href = this.getAttribute('href');
+      }
+    });
+  });
+});
+</script>
+
 </body>
 </html>

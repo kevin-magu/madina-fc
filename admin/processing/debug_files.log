@@ -2,12 +2,12 @@ Array
 (
     [playerPhoto] => Array
         (
-            [name] => 1F6E170C-FC9F-4DAD-81B9-1119A8031592_1_102_o.jpeg
-            [full_path] => 1F6E170C-FC9F-4DAD-81B9-1119A8031592_1_102_o.jpeg
+            [name] => Cristiano_Ronaldo,_2023.jpg
+            [full_path] => Cristiano_Ronaldo,_2023.jpg
             [type] => image/jpeg
-            [tmp_name] => /private/var/tmp/phpvnrvuer8ff1b2vLCnMy
+            [tmp_name] => /private/var/tmp/phpp3kk5eaosqndcvRbvEK
             [error] => 0
-            [size] => 57604
+            [size] => 47962
         )
 
 )

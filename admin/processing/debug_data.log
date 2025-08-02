@@ -1,10 +1,10 @@
 Array
 (
-    [playerName] => Hassan McAlister
+    [playerName] => Christiano Ronaldo
     [jerseyNumber] => 7
     [position] => Forward
-    [nationality] => Kenyan
-    [dob] => 2000-01-26
+    [nationality] => Portugal
+    [dob] => 2002-01-02
     [height] => 5'6
-    [weight] => 70
+    [weight] => 50
 )

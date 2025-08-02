@@ -4,24 +4,30 @@ require_once '../../includes/db_connect.php';
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
-$rawData = file_get_contents("php://input");
-$data = json_decode($rawData, true);
+// Sanitize input from FormData ($_POST)
+$matchDate         = $_POST['matchDate'] ?? '';
+$matchTime         = $_POST['matchTime'] ?? '';
+$opponent          = $_POST['opponent'] ?? '';
+$location          = $_POST['location'] ?? '';
+$stadium           = $_POST['stadium'] ?? '';
+$referee           = $_POST['referee'] ?? '';
+$homeScore         = (int)($_POST['homeScore'] ?? 0);
+$homeYellowCards   = (int)($_POST['homeYellowCards'] ?? 0);
+$homeRedCards      = (int)($_POST['homeRedCards'] ?? 0);
+$awayScore         = (int)($_POST['awayScore'] ?? 0);
+$awayYellowCards   = (int)($_POST['awayYellowCards'] ?? 0);
+$awayRedCards      = (int)($_POST['awayRedCards'] ?? 0);
+$matchReport       = $_POST['matchReport'] ?? '';
 
-// Sanitize input
-$matchDate         = $data['matchDate'] ?? '';
-$matchTime         = $data['matchTime'] ?? '';
-$opponent          = $data['opponent'] ?? '';
-$location          = $data['location'] ?? '';
-$stadium           = $data['stadium'] ?? '';
-$referee           = $data['referee'] ?? '';
-$homeScore         = (int)($data['homeScore'] ?? 0);
-$homeYellowCards   = (int)($data['homeYellowCards'] ?? 0);
-$homeRedCards      = (int)($data['homeRedCards'] ?? 0);
-$awayScore         = (int)($data['awayScore'] ?? 0);
-$awayYellowCards   = (int)($data['awayYellowCards'] ?? 0);
-$awayRedCards      = (int)($data['awayRedCards'] ?? 0);
-$matchReport       = $data['matchReport'] ?? '';
-$scorers           = $data['scorers'] ?? [];
+// Decode JSON string for scorers
+$scorersJson = $_POST['scorers'] ?? '[]';
+$scorers = json_decode($scorersJson, true);
+
+// Optional: Validate if JSON decoding worked
+if (!is_array($scorers)) {
+    $scorers = [];
+}
+
 
 // 1. Insert into results table
 $stmt = $conn->prepare("INSERT INTO results (match_date, match_time, opponent, location, stadium, referee, home_score, home_yellow_cards, home_red_cards, away_score, away_yellow_cards, away_red_cards, match_report) 
