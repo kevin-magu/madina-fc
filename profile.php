@@ -3,7 +3,7 @@ session_start();
 require_once 'includes/db_connect.php';
 
 // Check if user session exists
-if (!isset($_SESSION['player_id'], $_SESSION['session_token'])) {
+if (!isset($_SESSION['player_id']) || !isset($_SESSION['session_token'])) {
     header('Location: login.php');
     exit();
 }
@@ -12,7 +12,7 @@ $playerId = $_SESSION['player_id'];
 $sessionToken = $_SESSION['session_token'];
 
 // Verify session from DB
-$stmt = $conn->prepare("SELECT * FROM players WHERE id = ? AND session_token = ?");
+$stmt = $conn->prepare("SELECT * FROM player_tokens WHERE id = ? AND token = ?");
 $stmt->bind_param("is", $playerId, $sessionToken);
 $stmt->execute();
 $player = $stmt->get_result()->fetch_assoc();

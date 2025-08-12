@@ -20,7 +20,7 @@
                     <li><a href="">Fixtures & Results</a></li>
                     <li><a href="">Team</a></li>
                     <li><a href="">Gallery</a></li>
-                    <li><a href="login.php">Login</a></li>
+                    <li><a href="profile.php">Profile</a></li>
                 </ul>
                 
                 <div class="search-social">

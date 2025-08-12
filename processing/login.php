@@ -4,6 +4,9 @@ require_once '../includes/db_connect.php';
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
+// Start PHP session
+session_start();
+
 $rawData = file_get_contents("php://input");
 $data = json_decode($rawData, true);
 
@@ -17,7 +20,7 @@ if (!$clubId || !$password) {
 }
 
 // Step 1: Check if club ID exists in players table
-$stmt = $conn->prepare("SELECT id, name FROM players WHERE club_id = ?");
+$stmt = $conn->prepare("SELECT id, club_id , name FROM players WHERE club_id = ?");
 $stmt->bind_param("s", $clubId);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -30,6 +33,8 @@ if ($result->num_rows === 0) {
     exit;
 }
 
+$player = $result->fetch_assoc();
+
 // Step 2: Check if club ID exists in player_tokens table
 $stmtToken = $conn->prepare("SELECT id, club_id, password, token, expires_at FROM player_tokens WHERE club_id = ?");
 $stmtToken->bind_param("s", $clubId);
@@ -37,7 +42,6 @@ $stmtToken->execute();
 $tokenResult = $stmtToken->get_result();
 
 if ($tokenResult->num_rows === 0) {
-    // Player never logged in or set up password
     echo json_encode([
         "success" => false,
         "redirect" => "forgot-password.php",
@@ -46,9 +50,9 @@ if ($tokenResult->num_rows === 0) {
     exit;
 }
 
-// Step 3: Validate password from player_tokens table
 $playerToken = $tokenResult->fetch_assoc();
 
+// Step 3: Validate password
 if (!password_verify($password, $playerToken['password'])) {
     echo json_encode([
         "success" => false,
@@ -67,7 +71,13 @@ $update = $conn->prepare("UPDATE player_tokens SET token = ?, expires_at = ? WHE
 $update->bind_param("ssi", $newToken, $expiresAtFormatted, $playerToken['id']);
 $update->execute();
 
-// Optionally set secure cookie
+// Save session variables
+$_SESSION['player_id'] = $player['id'];
+$_SESSION['club_id'] = $player['club_id'];
+$_SESSION['player_name'] = $player['name'];
+$_SESSION['session_token'] = $newToken;
+
+// Optionally set secure cookie for token
 setcookie('player_token', $newToken, [
     'expires' => $expiresAt,
     'path' => '/',
@@ -82,7 +92,8 @@ echo json_encode([
     "success" => true,
     "message" => "Login successful.",
     "player" => [
-        "club_id" => $playerToken['club_id']
+        "club_id" => $playerToken['club_id'],
+        "name" => $player['name']
     ],
     "token" => $newToken,
     "expires" => $expiresAtFormatted
