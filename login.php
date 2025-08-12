@@ -26,6 +26,8 @@ require_once './includes/db_connect.php';
                 </div>
 
                 <form id="loginForm" class="login-form" method="POST">
+                    <div id="messageBox" style="display:none; margin-top:10px; font-weight:500; font-size: 14px;"></div>
+
                     <div class="form-group">
                         <label for="email">Player ID</label>
                         <div class="input-wrapper">

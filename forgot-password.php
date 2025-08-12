@@ -22,10 +22,21 @@ require_once './includes/db_connect.php';
             <div class="login-card">
             <div class="login-header">
                     <h1><i class="fas fa-sign-in-alt"></i> Player Login</h1>
-                    <p>Access your personalized profile</p>
+                    <p>change your password.</p>
                 </div>
 
+                
+
                 <form id="loginForm" class="login-form" method="POST">
+                     <div id="messageBox" style="display:none; margin-top:10px; font-weight:500; font-size: 14px;"></div>
+                    <div class="form-group">
+                        <label for="email">Player ID</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-id-card input-icon"></i>
+                            <input type="number" id="username" name="username" placeholder="Enter your username" required>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="email">New Password</label>
                         <div class="input-wrapper">
@@ -55,7 +66,7 @@ require_once './includes/db_connect.php';
             </div>
         </main>
     </div>
-<script src="scripts/login.js"></script>
+<script src="assets/js/forgot-password.js"></script>
 
 </body>
 </html>
