@@ -60,7 +60,7 @@ require_once './includes/db_connect.php';
             </div>
         </main>
     </div>
-<script src="scripts/login.js"></script>
+<script src="assets/js/login.js"></script>
 
 </body>
 </html>
